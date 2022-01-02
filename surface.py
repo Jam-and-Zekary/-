@@ -4,7 +4,7 @@ from tkinter import ttk
 import predict
 import cv2
 from PIL import Image, ImageTk  # 生成图像
-import threading  # 警告信息提示之类的库
+import threading  # 警告信息提示之类的库`
 import time  # 时间库
 
 

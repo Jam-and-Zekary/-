@@ -11,8 +11,8 @@
 	{
 		"open":0,
 		"blur":3,
-		"morphologyr":5,
-		"morphologyc":12,
+		"morphologyr":20,
+		"morphologyc":20,
 		"col_num_limit":10,
 		"row_num_limit":18
 	}
