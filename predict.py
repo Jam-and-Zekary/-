@@ -39,7 +39,7 @@ def find_waves(threshold, histogram):
         elif not is_peak and x >= threshold:
             is_peak = True
             up_point = i
-    if is_peak and up_point != -1 and i - up_point > 4:
+    if is_peak and up_point != -1 and i - up_point > 9:
         wave_peaks.append((up_point, i))
     return wave_peaks
 
@@ -477,7 +477,7 @@ class CardPredictor:
                 x_histogram = np.sum(gray_img, axis=1)
                 x_min = np.min(x_histogram)
                 x_average = np.sum(x_histogram) / x_histogram.shape[0]
-                x_threshold = (x_min + x_average) / 2
+                x_threshold = (x_min + x_average) / 4
                 wave_peaks = find_waves(x_threshold, x_histogram)
                 if len(wave_peaks) == 0:
                     print("peak less 0:")
@@ -512,7 +512,7 @@ class CardPredictor:
                 # 组合分离汉字
                 cur_dis = 0
                 for i, wave in enumerate(wave_peaks):
-                    if wave[1] - wave[0] + cur_dis > max_wave_dis * 0.7:
+                    if wave[1] - wave[0] + cur_dis > max_wave_dis * 0.5:
                         break
                     else:
                         cur_dis += wave[1] - wave[0]
@@ -543,9 +543,9 @@ class CardPredictor:
                     part_card = cv2.copyMakeBorder(part_card, 0, 0, w, w, cv2.BORDER_CONSTANT, value=[0, 0, 0])
                     part_card = cv2.resize(part_card, (SZ, SZ), interpolation=cv2.INTER_AREA)
                     # point 5
-                    # cv2.imshow("part", part_card_old)
+                    cv2.imshow("part", part_card_old)
                     # cv2.imwrite("u.jpg", part_card)
-                    # cv2.waitKey(0)
+                    cv2.waitKey(0)
                     part_card = deskew(part_card)
                     part_card = preprocess_hog([part_card])
                     if i == 0:
